@@ -161,6 +161,66 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-call和apply的用法及区别">
+    <header class="cube-excerpt-header">
+        <h1><a href="/Blog/2018/04/10/call和apply的用法及区别/">call和apply的用法及区别</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-04-10
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/Blog/tags/javascript/" class="cube-excerpt-tag-link">#javascript</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>##call()和apply()的作用<br>call与apply用于改变对象的执行上下文</p>
+<p><strong>什么是对象上下文？</strong></p>
+<p>对象上下文是指当前函数运行的环境，我们在书写一个函数时常会用到this，而this就指向当前的执行上下文</p>
+<p>##为什么改变执行上下文</p>
+<p>假设我们寝室有A、B两人。A有一个电热水壶但是B没有，但是突然有一天，B由于某种原因需要用电热水壶，那么B是买一个还是借用A的呢？答案不言而喻。而call和apply就可以借用别的函数中的方法</p>
+<p>##call()和apply()的基本使用</p>
+<p>###call()</p>
+<pre><code>function.call(obj,arg1,arg2,...,argN);
+</code></pre><ul>
+<li>调用apply()与call()必须是一个函数</li>
+<li>第一个参数是要改变执行上下文的对象，也就是将this指向该对象</li>
+<li>第二个参数是要传入function的参数</li>
+</ul>
+<p>###apply()<br>        function.apply(obj,[args]);</p>
+<ul>
+<li>apply的使用方法基本与call相同</li>
+<li>不同在于apply传入的参数必须是一个数组或是伪数组，但最终都会被转成伪数组传入argumens中</li>
+</ul>
+<p>##对象继承</p>
+<p>由于可以改变this指向，也就可以实现继承</p>
+<pre><code>    function a() {
+    this.name=&apos;aa&apos;;
+    this.show=function () {
+        console.log(this.name);
+    }
+}
+
+    function b() {
+        a.call(this);
+        this.show();
+        console.log(this.name);
+    }
+    b();
+</code></pre>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/Blog/2018/04/10/call和apply的用法及区别/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-my first">
     <header class="cube-excerpt-header">
         <h1><a href="/Blog/2018/04/09/my-first/">my first</a></h1>
@@ -304,8 +364,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>2</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count articles"><span>3</span>Article</a>
+        <a class="count tags"><span>2</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -343,7 +403,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/Blog/2018/04/09/my-first/" title="my first">my first</a>
+                    <a href="/Blog/2018/04/10/call和apply的用法及区别/" title="call和apply的用法及区别">call和apply的用法及区别</a>
                 </p>
             </div>
             
@@ -355,6 +415,19 @@
             <div class="normal">
                 <p class="index">
                     <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/Blog/2018/04/09/my-first/" title="my first">my first</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
                 </p>
                 <p class="title">
                     <a href="/Blog/2018/04/02/hello-world/" title="Hello World">Hello World</a>
@@ -377,8 +450,13 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/Blog/tags/testtest/">#testtest</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/Blog/tags/javascript/">#javascript</a>
         </div>
         
     </div>
