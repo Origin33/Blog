@@ -161,9 +161,9 @@
     <div class="cube-content">
         <div class="cube-left">
             
-<div class="cube-excerpt" id="cube-excerpt-javascript中的数据类型">
+<div class="cube-excerpt" id="cube-excerpt-ECMAScript中的原始数据类型">
     <header class="cube-excerpt-header">
-        <h1><a href="/Blog/2018/04/10/ECMAScript中的原始数据类型/">javascript中的数据类型</a></h1>
+        <h1><a href="/Blog/2018/04/10/ECMAScript中的原始数据类型/">ECMAScript中的原始数据类型</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -209,30 +209,27 @@ console.log(typeof(b));        //undefined
 </code></pre><p>当函数无明确返回值时，返回的也是undefined，如：</p>
 <pre><code>function test(){};
 console.log(test()==undefined);        //true
-</code></pre><p>###Null类型<br>Null类型是另一种只有一个值的数据类型，由于undefined是由null派生出的，所以ECMAScript把它们定义为相等</p>
+</code></pre><h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><p>Null类型是另一种只有一个值的数据类型，由于undefined是由null派生出的，所以ECMAScript把它们定义为相等</p>
 <pre><code>console.log(null==undefined);        //true
 console.log(null===undefined);        //false
 </code></pre><p>尽管这两个值相等，但它们的含义不同。undifined是声明一个变量但却没定义，null则是表示尚未存在的对象。</p>
-<p>###Number类型<br>Number类型既可以表示32位的整数，也可以表示64位的浮点数</p>
-<p>####十进制数</p>
-<pre><code>var a=64;
-</code></pre><p>####八进制数</p>
-<pre><code>var b=071;
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a>Number类型</h3><p>Number类型既可以表示32位的整数，也可以表示64位的浮点数</p>
+<h4 id="十进制数"><a href="#十进制数" class="headerlink" title="十进制数"></a>十进制数</h4><pre><code>var a=64;
+</code></pre><h4 id="八进制数"><a href="#八进制数" class="headerlink" title="八进制数"></a>八进制数</h4><pre><code>var b=071;
 </code></pre><p>八进制数字面量的首数字必须是0，后面接不大于8的数</p>
-<p>####十六进制数</p>
-<pre><code>var c=0xf0;
+<h4 id="十六进制数"><a href="#十六进制数" class="headerlink" title="十六进制数"></a>十六进制数</h4><pre><code>var c=0xf0;
 </code></pre><p>十六进制数字面量前两个为0x，后接不大于f的数</p>
-<p>####浮点数<br>浮点数中必须有小数点，小数点后必须至少有一位数字</p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>浮点数中必须有小数点，小数点后必须至少有一位数字</p>
 <pre><code>var d=7.5;
 </code></pre><p><strong>浮点数在进行运算前是以字符串形式存储的</strong></p>
-<p>####NaN<br>NaN表示不是Number类型(Not a Number)，该情况大多数发生在数据类型转换失败的情况下，如将”blue”转成Number类型。</p>
+<h4 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h4><p>NaN表示不是Number类型(Not a Number)，该情况大多数发生在数据类型转换失败的情况下，如将”blue”转成Number类型。</p>
 <p>NaN另一个有趣的地方是它并不等于它本身</p>
 <pre><code>console.log(NaN==NaN);        //false
-</code></pre><p>####科学计数法<br>当要表示一个非常大的数时，可以用一个数加e，后面乘以10的倍数</p>
+</code></pre><h4 id="科学计数法"><a href="#科学计数法" class="headerlink" title="科学计数法"></a>科学计数法</h4><p>当要表示一个非常大的数时，可以用一个数加e，后面乘以10的倍数</p>
 <pre><code>var num=5.678e7;        //56780000
 </code></pre><p>当要表示一个非常小的数时，可以用一个数后加-e</p>
 <pre><code>var num=4e-6;        //0.000004
-</code></pre><p>####特殊Number值<br>Number.MAX_VALUE,Number.MIN_VALUE分别表示Number类型的最大值及最小值,所有ECMAScript数都必须在这之间</p>
+</code></pre><h4 id="特殊Number值"><a href="#特殊Number值" class="headerlink" title="特殊Number值"></a>特殊Number值</h4><p>Number.MAX_VALUE,Number.MIN_VALUE分别表示Number类型的最大值及最小值,所有ECMAScript数都必须在这之间</p>
 <pre><code>var max=Number.MAX_VALUE;
 var min=Number.MIN_VALUE;
 console.log(max+&apos;,&apos;+min);
@@ -243,7 +240,7 @@ if (isFinite(iResult)) {
 }else {
     alert(&quot;infinite&quot;);
 }
-</code></pre><p>####String类型<br>String类型是唯一一个没有固定大小的原始类型，可以用字符串存储0到更多的Unicode字符</p>
+</code></pre><h4 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h4><p>String类型是唯一一个没有固定大小的原始类型，可以用字符串存储0到更多的Unicode字符</p>
 
         
     </article>
@@ -490,7 +487,7 @@ b();
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/Blog/2018/04/10/ECMAScript中的原始数据类型/" title="javascript中的数据类型">javascript中的数据类型</a>
+                    <a href="/Blog/2018/04/10/ECMAScript中的原始数据类型/" title="ECMAScript中的原始数据类型">ECMAScript中的原始数据类型</a>
                 </p>
             </div>
             
@@ -551,17 +548,17 @@ b();
         
         
         <div class="cube-box-bg ">
+            <a href="/Blog/tags/javascript/">#javascript</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/Blog/tags/testtest/">#testtest</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/Blog/tags/javaScript-ECMAScript/">#javaScript,ECMAScript</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/Blog/tags/javascript/">#javascript</a>
         </div>
         
     </div>
