@@ -10,7 +10,7 @@
     
     
     
-    <title>Archives | Origin33</title>
+    <title>javascript中的数据类型 | Origin33</title>
     <!-- inject:style -->
     <link href="/Blog/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -160,54 +160,112 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">javascript中的数据类型</h1>
     
-        
-        <div class="cube-archive" style="margin-top: 0;">
-            
-                
-                   
-                            <h1 class="title">2018</h1>
-                            <ul class="posts">
-                   
-                            <li class="post">
-                                <a href="/Blog/2018/04/10/ECMAScript中的原始数据类型/">javascript中的数据类型</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/Blog/2018/04/10/call和apply的用法及区别/">call和apply的用法及区别</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/Blog/2018/04/09/my-first/">my first</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/Blog/2018/04/02/hello-world/">Hello World</a>
-                            </li>
-                
-            
-                    </ul>
-                        </div>
-        
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2018-04-10
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/Blog/tags/javaScript-ECMAScript/">#javaScript,ECMAScript</a>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <h2 id="原始数据类型"><a href="#原始数据类型" class="headerlink" title="原始数据类型"></a>原始数据类型</h2><h3 id="ECMAScript中有5种原始数据类型"><a href="#ECMAScript中有5种原始数据类型" class="headerlink" title="ECMAScript中有5种原始数据类型"></a>ECMAScript中有5种原始数据类型</h3><ol>
+<li>null</li>
+<li>undefine</li>
+<li>number</li>
+<li>boolean</li>
+<li>string</li>
+</ol>
+<h3 id="typeof-运算符"><a href="#typeof-运算符" class="headerlink" title="typeof()运算符"></a>typeof()运算符</h3><p>typeof()中有一个参数，即要检查的值，例如：</p>
+<pre><code>console.log(typeof(123));                //number
+console.log(typeof(&apos;123&apos;));                 //string
+console.log(typeof(true));                 //boolean
+console.log(typeof(undefined));             //undefined
+console.log(typeof(function () {}));     //function
+console.log(typeof([]));                 //object
+console.log(typeof({}));                 //object
+console.log(typeof(null));               //object 
+</code></pre><p>其中null检测为object是javascript最初实现时的一个错误，后来被ECMAScript沿用。现在被解释为是对象的占位符，从技术上来讲，null仍是一个原始值。</p>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a>Undefined类型</h3><p>Undefined类型只有一个值，即undefined。当声明一个变量却没有给其定义时，默认值为undefined</p>
+<pre><code>var a;
+console.log(a==undefined);        //true
+</code></pre><p>undfined并不等同于未定义的值，但typeof()不能真正区分这两种值，如：</p>
+<pre><code>var a;
+console.log(typeof(a));        //undefined
+console.log(typeof(b));        //undefined
+</code></pre><p>虽然b没有被定义，但依然输出的是undefined。当对b使用其他运算符时会引发错误，如：</p>
+<pre><code>console.log(b==undefined);
+</code></pre><p>当函数无明确返回值时，返回的也是undefined，如：</p>
+<pre><code>function test(){};
+console.log(test()==undefined);        //true
+</code></pre><p>###Null类型<br>Null类型是另一种只有一个值的数据类型，由于undefined是由null派生出的，所以ECMAScript把它们定义为相等</p>
+<pre><code>console.log(null==undefined);        //true
+console.log(null===undefined);        //false
+</code></pre><p>尽管这两个值相等，但它们的含义不同。undifined是声明一个变量但却没定义，null则是表示尚未存在的对象。</p>
+<p>###Number类型<br>Number类型既可以表示32位的整数，也可以表示64位的浮点数</p>
+<p>####十进制数</p>
+<pre><code>var a=64;
+</code></pre><p>####八进制数</p>
+<pre><code>var b=071;
+</code></pre><p>八进制数字面量的首数字必须是0，后面接不大于8的数</p>
+<p>####十六进制数</p>
+<pre><code>var c=0xf0;
+</code></pre><p>十六进制数字面量前两个为0x，后接不大于f的数</p>
+<p>####浮点数<br>浮点数中必须有小数点，小数点后必须至少有一位数字</p>
+<pre><code>var d=7.5;
+</code></pre><p><strong>浮点数在进行运算前是以字符串形式存储的</strong></p>
+<p>####NaN<br>NaN表示不是Number类型(Not a Number)，该情况大多数发生在数据类型转换失败的情况下，如将”blue”转成Number类型。</p>
+<p>NaN另一个有趣的地方是它并不等于它本身</p>
+<pre><code>console.log(NaN==NaN);        //false
+</code></pre><p>####科学计数法<br>当要表示一个非常大的数时，可以用一个数加e，后面乘以10的倍数</p>
+<pre><code>var num=5.678e7;        //56780000
+</code></pre><p>当要表示一个非常小的数时，可以用一个数后加-e</p>
+<pre><code>var num=4e-6;        //0.000004
+</code></pre><p>####特殊Number值<br>Number.MAX_VALUE,Number.MIN_VALUE分别表示Number类型的最大值及最小值,所有ECMAScript数都必须在这之间</p>
+<pre><code>var max=Number.MAX_VALUE;
+var min=Number.MIN_VALUE;
+console.log(max+&apos;,&apos;+min);
+</code></pre><p>也有专门的值表示无穷大，即infinite。Number.POSITIVE_INFINITY的值为infinite，表示正无穷。Number.NEGATIVE_INFINITY的值为-infinite，表示负无穷。判断一个数是否有穷，可以使用isFinite()方法，以确保该数是否无穷大</p>
+<pre><code>var iResult = iNum * some_really_large_number;
+if (isFinite(iResult)) {
+    alert(&quot;finite&quot;);
+}else {
+    alert(&quot;infinite&quot;);
+}
+</code></pre><p>####String类型<br>String类型是唯一一个没有固定大小的原始类型，可以用字符串存储0到更多的Unicode字符</p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/Blog/2018/04/10/call和apply的用法及区别/">
+                call和apply的用法及区别
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
