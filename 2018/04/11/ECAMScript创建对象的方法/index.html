@@ -177,7 +177,130 @@
     
     <div class="cube-article-content cube-markdown">
         
-        
+        <h2 id="原始的方式"><a href="#原始的方式" class="headerlink" title="原始的方式"></a>原始的方式</h2><pre><code>var ming=new Object;
+ming.name=&apos;小明&apos;;
+ming.gender=&apos;male&apos;;
+ming.age=13;
+ming.say=function(){
+    alert(this.name);
+}
+</code></pre><p>原始的方式在要创建多个拥有相同属性名的实例对象时，会很麻烦</p>
+<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><pre><code>function Person(){
+    var ming=new Object;
+    ming.name=&apos;小明&apos;;
+    ming.gender=&apos;male&apos;;
+    ming.age=13;
+    ming.say=function(){
+        alert(this.name);
+    }
+    return ming;
+}
+var a=Person();
+var b=Person();
+</code></pre><p>我们可以通过给Person添加参数，使我们可以创建拥有相同属性但值不同的实例对象</p>
+<pre><code>function Person(name,gender,age){
+    var ming=new Object;
+    ming.name=name||&apos;小明&apos;;
+    ming.gender=gender||&apos;male&apos;;
+    ming.age=age||13;
+    ming.say=function(){
+        alert(this.name);
+    }
+}
+var a=Person(&apos;小红&apos;,&apos;女&apos;,12);
+var b=Person();
+</code></pre><p>工厂方式有一个缺点，每次调用Person()函数时，都会创建新函数say()。<br>这意味这每一个对象都拥有自己的say()函数，这会造成内存的浪费。有些开发者在工厂函数外定义函数，通过属性值指向该函数，从而避免这一问题</p>
+<pre><code>function say(){
+    alert(this.name);
+}
+function Person(name,gender,age){
+    var ming=new Object;
+    ming.name=name||&apos;小明&apos;;
+    ming.gender=gender||&apos;male&apos;;
+    ming.age=age||13;
+    ming.say=say;
+}
+var a=Person(&apos;小红&apos;,&apos;女&apos;,12);
+var b=Person();
+</code></pre><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><pre><code>function Person(){
+    this.name=&apos;xiaoming&apos;;
+    this.gender=&apos;male&apos;;
+    this.age=13;
+    this.say=function(){
+        alert(this.name);
+    }
+}
+var a=new Person();
+var b=new Person();
+</code></pre><p>构造函数没有像上面工厂函数一样在函数内创建对象，而是使用this关键字。使用new运算符时，在执行构造函数内第一行代码前，会创建一个对象，只有this才能访问这个对象。然后直接赋予this属性，默认情况下this是构造函数的返回值。</p>
+<p><strong>但构造函数和上面的工厂方式有着相同的问题：重复创建函数对象</strong></p>
+<h2 id="原型方式"><a href="#原型方式" class="headerlink" title="原型方式"></a>原型方式</h2><pre><code>function Person(){}
+Person.prototype.name=&apos;xiaoming&apos;;
+Person.prototype.gender=&apos;male&apos;;
+Person.prototype.age=13;
+Person.prototype.say=function(){
+    alert(this.name);
+}
+var a=new Person();
+var b=new Person();
+</code></pre><p>虽然原型方式解决了重复创建函数对象的问题，但也有缺点。一是只有当对象创建完成后才能改变属性值，二是属性指向的是对象而不是函数时。函数共享没有问题，但对象却很少被多个实例共享</p>
+<pre><code>function Person(){}
+Person.prototype.name=&apos;xiaoming&apos;;
+Person.prototype.gender=&apos;male&apos;;
+Person.prototype.age=13;
+Person.prototype.friend=[&apos;mike&apos;,&apos;xiaohong&apos;];
+Person.prototype.say=function(){
+    alert(this.name);
+}
+var a=new Person();
+var b=new Person();
+console.log(a.friend);     //[&quot;mike&quot;,&quot;&quot;xiaohong&quot;]
+console.log(b.friend);     //[&quot;mike&quot;,&quot;&quot;xiaohong&quot;]
+b.friend.push(&apos;lilei&apos;);      
+console.log(a.friend);       //[&quot;mike&quot;,&quot;&quot;xiaohong&quot;,&quot;lilei&quot;]
+console.log(b.friend);     //[&quot;mike&quot;,&quot;&quot;xiaohong&quot;,&quot;lilei&quot;]
+</code></pre><p>##混合构造函数/原型方式</p>
+<pre><code>function Person(name,gender,age){
+    this.name=name;
+    this.gender=gender;
+    this.age=13;
+    this.friend=[&apos;mike&apos;,&apos;xiaohong&apos;];
+}
+Person.prototype.say=function(){
+    alert(this.name);
+}
+</code></pre><p>这种方式解决了上面所有的问题，并且时ECMAScript采用的主要方式，有其它方式的特点，却没有它们的缺点。不过仍有些人觉得这种方法不够完美</p>
+<p>##动态原型方式</p>
+<pre><code>function Person(){
+    this.name=name;
+    this.gender=gender;
+    this.age=13;
+    this.friend=[&apos;mike&apos;,&apos;xiaohong&apos;];
+    if(typeof(Person._flag)==&apos;undefined&apos;){
+        Person.prototype.say=function(){
+            alert(this.name);
+        }
+        Person._flag=true;
+    }
+}
+</code></pre><p>若Person._flag未定义则构造函数将用原型方式定义对象方法，如果定义了则不再定义方法</p>
+<p>##混合工厂方式    </p>
+<pre><code>function Person(){
+    var ming=new Object;
+    ming.name=&apos;小明&apos;;
+    ming.gender=&apos;male&apos;;
+    ming.age=13;
+    ming.say=function(){
+        alert(this.name);
+    }
+    return ming;
+}
+var a=new Person();
+var b=new Person();
+</code></pre><p>与经典方式不同，这种方式使用 new 运算符，使它看起来像真正的构造函数</p>
+<p>由于在Person() 构造函数内部调用了new运算符，所以将忽略第二个 new 运算符（位于构造函数之外），在构造函数内部创建的对象被传递回变量 </p>
+<p>这种方式在对象方法的内部管理方面与经典方式有着相同的问题。强烈建议：除非万不得已，还是避免使用这种方式。</p>
+
     </div>
 </div>
 
@@ -354,13 +477,13 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/Blog/tags/testtest/">#testtest</a>
+        <div class="cube-box ">
+            <a href="/Blog/tags/javascript/">#javascript</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/Blog/tags/javascript/">#javascript</a>
+            <a href="/Blog/tags/testtest/">#testtest</a>
         </div>
         
     </div>
